@@ -2,6 +2,7 @@
 import RNFetchBlob from 'react-native-fetch-blob'
 import {findAvailableFilename} from './file.shared'
 
+
 function tmpDir (): string {
   return RNFetchBlob.fs.dirs.CacheDir
 }
@@ -11,7 +12,7 @@ function tmpFile (suffix: string): string {
 }
 
 function downloadFilePath (suffix: string): Promise<string> {
-  return findAvailableFilename(exists, `${tmpDir()}/${suffix}`)
+    return `${RNFetchBlob.fs.dirs.DownloadDir}/${suffix}`
 }
 
 function copy (from: string, to: string): Promise<void> {
