@@ -755,6 +755,10 @@ const getSupersedes = (state: TypedState): ?SupersedeInfo => {
   return selectedConversationIDKey ? convSupersedesInfo(selectedConversationIDKey, state.chat) : null
 }
 
+function isImageFileName (filename: string): boolean {
+  return filename.match(/[^/]+\.(jpg|png|gif|jpeg|bmp)$/) == null
+}
+
 export {
   getBrokenUsers,
   getEditingMessage,
@@ -790,4 +794,5 @@ export {
   getSelectedInbox,
   getTLF,
   getMuted,
+  isImageFileName,
 }
