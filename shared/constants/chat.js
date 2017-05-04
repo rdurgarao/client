@@ -756,7 +756,7 @@ const getSupersedes = (state: TypedState): ?SupersedeInfo => {
 }
 
 function isImageFileName (filename: string): boolean {
-  return filename.match(/[^/]+\.(jpg|png|gif|jpeg|bmp)$/) == null
+  return filename.match(/[^/]+\.(jpg|png|gif|jpeg|bmp)$/) != null
 }
 
 export {
