@@ -8,6 +8,7 @@ import {isDevApplePushToken} from '../local-debug'
 import {chatTab} from '../constants/tabs'
 import {setInitialTab, setInitialLink} from './config'
 import {setInitialConversation} from './chat'
+import {isImageFileName} from '../constants/chat'
 
 import type {AsyncAction} from '../constants/types/flux'
 
