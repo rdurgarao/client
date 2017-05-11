@@ -2,7 +2,6 @@
 
 export type FeatureKeys = 'admin'
  | 'chatAdminOnly'
- | 'mobileAppsExist'
  | 'plansEnabled'
  | 'recentFilesEnabled'
  | 'tabChatEnabled'
