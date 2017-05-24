@@ -959,6 +959,7 @@ func (u *UserPlusKeys) DeepCopy() UserPlusKeys {
 		Uvv:               u.Uvv,
 		DeletedDeviceKeys: append([]PublicKey{}, u.DeletedDeviceKeys...),
 		PerUserKeys:       append([]PerUserKey{}, u.PerUserKeys...),
+		EldestSeqno:       u.EldestSeqno,
 	}
 }
 
