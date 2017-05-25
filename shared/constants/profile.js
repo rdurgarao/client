@@ -2,6 +2,7 @@
 import type {PlatformsExpandedType} from './types/more'
 import type {ProofStatus, SigID, KID} from './types/flow-types'
 import type {TypedAction, NoErrorTypedAction} from './types/flux'
+import type {NonNullGregorItem} from '../constants/gregor'
 
 export type PgpInfo = {
   email1: ?string,
@@ -69,6 +70,7 @@ export const updateSigID = 'profile:updateSigID'
 export const updateUsername = 'profile:updateUsername'
 export const waiting = 'profile:waiting'
 export const waitingRevokeProof = 'profile:revoke:waiting'
+export const onFollowNotifications = 'profile:onFollowNotifications'
 export type AddProof = NoErrorTypedAction<'profile:addProof', {platform: PlatformsExpandedType}>
 export type BackToProfile = NoErrorTypedAction<'profile:backToProfile', void>
 export type CancelAddProof = NoErrorTypedAction<'profile:cancelAddProof', void>
@@ -101,6 +103,10 @@ export type OnClickFollowing = NoErrorTypedAction<
 >
 export type OnUserClick = NoErrorTypedAction<'profile:onUserClick', {username: string}>
 export type OutputInstructionsActionLink = NoErrorTypedAction<'profile:outputInstructionsActionLink', void>
+export type OnFollowNotifications = NoErrorTypedAction<
+  'profile:onFollowNotifications',
+  {followings: Array<NonNullGregorItem>}
+>
 export type SubmitZcashAddress = NoErrorTypedAction<'profile:submitZcashAddress', void>
 export type SubmitBTCAddress = NoErrorTypedAction<'profile:submitBTCAddress', void>
 export type SubmitRevokeProof = NoErrorTypedAction<'profile:submitRevokeProof', {proofId: string}>

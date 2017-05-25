@@ -22,6 +22,8 @@ import {safeTakeEvery} from '../../util/saga'
 import type {SagaGenerator} from '../../constants/types/saga'
 import type {TypedState} from '../../constants/reducer'
 import type {AppLink} from '../../constants/app'
+import type {NonNullGregorItem} from '../../constants/gregor'
+import {NotifyPopup} from '../../native/notifications'
 
 function editProfile(bio: string, fullName: string, location: string): Constants.EditProfile {
   return {payload: {bio, fullName, location}, type: Constants.editProfile}
@@ -209,6 +211,21 @@ function* _outputInstructionsActionLink(): SagaGenerator<any, any> {
   }
 }
 
+function onFollowNotifications(followings: Array<NonNullGregorItem>): Constants.OnFollowNotifications {
+  return {payload: {followings}, type: Constants.onFollowNotifications}
+}
+
+function* _onFollowNotifications(followings: Array<NonNullGregorItem>): SagaGenerator<any, any> {
+  followings.forEach(f => {
+    console.log('Sending Follow notification: ', f.item.body)
+    put((dispatch: Dispatch) => {
+      NotifyPopup('New Follower!', {body: f.item.body}, -1, f.item.body, () => {
+        dispatch(onUserClick(f.item.body.replace(/ is now following you\./gi, '')))
+      })
+    })
+  })
+}
+
 function backToProfile(): Constants.BackToProfile {
   return {payload: undefined, type: Constants.backToProfile}
 }
@@ -228,6 +245,7 @@ function* _profileSaga(): SagaGenerator<any, any> {
   yield safeTakeEvery(Constants.onUserClick, _onUserClick)
   yield safeTakeEvery(Constants.outputInstructionsActionLink, _outputInstructionsActionLink)
   yield safeTakeEvery(Constants.submitRevokeProof, _submitRevokeProof)
+  yield safeTakeEvery(Constants.onFollowNotifications, _onFollowNotifications)
   yield safeTakeEvery('app:link', _onAppLink)
 }
 
@@ -257,6 +275,7 @@ export {
   submitUsername,
   updatePgpInfo,
   updateUsername,
+  onFollowNotifications,
 }
 
 export default profileSaga

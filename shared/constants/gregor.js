@@ -30,7 +30,14 @@ export type CheckReachability = TypedAction<'gregor:checkReachability', void, vo
 export const updateSeenMsgs = 'gregor:updateSeenMsgs'
 export type UpdateSeenMsgs = TypedAction<'gregor:updateSeenMsgs', {seenMsgs: Array<NonNullGregorItem>}, void>
 
-export type GregorActions = PushState | UpdateSeenMsgs
+export const updateFollowMsgs = 'gregor:updateFollowMsgs'
+export type UpdateFollowMsgs = TypedAction<
+  'gregor:updateFollowMsgs',
+  {followMsgs: Array<NonNullGregorItem>},
+  void
+>
+
+export type GregorActions = PushState | UpdateSeenMsgs | UpdateFollowMsgs
 
 export type State = {
   reachability: Reachability,
