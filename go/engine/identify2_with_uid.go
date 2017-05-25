@@ -764,6 +764,13 @@ func (e *Identify2WithUID) runIdentifyUI(netContext context.Context, ctx *Contex
 	// use Confirm to display the IdentifyOutcome
 	outcome := e.state.Result()
 	outcome.TrackOptions = e.trackOptions
+
+	if loggedIn, _, _ := IsLoggedIn(e, ctx); !loggedIn {
+		// Force LocalOnly if we are not logged in. Remote tracking
+		// will not do anything, anyway, and the message would be
+		// confusing to the user.
+		outcome.TrackOptions.LocalOnly = true
+	}
 	e.confirmResult, err = iui.Confirm(outcome.Export())
 	if err != nil {
 		e.G().Log.CDebugf(netContext, "| Failure in iui.Confirm")
