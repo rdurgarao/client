@@ -585,8 +585,8 @@ func (u *User) UpdateEmailProof(key GenericKey, newEmail string) (*jsonw.Wrapper
 }
 
 type TeamSection struct {
-	Name    string          `json:"name"`
-	ID      keybase1.TeamID `json:"id"`
+	Name    string          `json:"name,omitempty"`
+	ID      keybase1.TeamID `json:"id,omitempty"`
 	Members struct {
 		Owner  []NameWithEldestSeqno `json:"owner"`
 		Admin  []NameWithEldestSeqno `json:"admin"`
